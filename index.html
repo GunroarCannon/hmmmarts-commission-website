@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hmmm Arts | Hand-Drawn Comics in 42 Hours</title>
+    <meta name="description" content="Fast, heartfelt short comics — hand-drawn, manga-inspired. Human-made, no AI.">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Human Arts | Hand-Drawn Comics in 42 Hours">
+    <meta property="og:description" content="Fast, heartfelt short comics — hand-drawn, manga-inspired. Human-made, no AI.">
+    <meta property="og:image" content="https://hmmmgames.itch.io/uploads/og-image.jpg">
+    <meta property="og:url" content="https://hmmmgames.itch.io">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@therealgunroar">
+    <meta name="twitter:creator" content="@therealgunroar">
+    
+    <style>
+        /* CSS Variables for Theme */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --hand-drawn-border: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10,10 Q30,5 50,10 T90,10 T90,90 Q85,70 90,50 T90,10' fill='none' stroke='%23333' stroke-width='2'/%3E%3C/svg%3E");
+        }
+
+        /* Dark Mode */
+        [data-theme="dark"] {
+            --primary-color: #e2e8f0;
+            --accent-color: #63b3ed;
+            --light-bg: #1a202c;
+            --card-bg: #2d3748;
+            --text-color: #e2e8f0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* CSS Variables for Theme */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --hand-drawn-border: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10,10 Q30,5 50,10 T90,10 T90,90 Q85,70 90,50 T90,10' fill='none' stroke='%23333' stroke-width='2'/%3E%3C/svg%3E");
+        }
+
+        /* Dark Mode */
+        [data-theme="dark"] {
+            --primary-color: #e2e8f0;
+            --accent-color: #63b3ed;
+            --light-bg: #1a202c;
+            --card-bg: #2d3748;
+            --text-color: #e2e8f0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Payment Method Styles */
+        .payment-method {
+            flex: 1;
+            min-width: 200px;
+            padding: 20px;
+            background-color: var(--light-bg);
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .payment-method:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-method.featured {
+            border: 2px solid var(--accent-color);
+            position: relative;
+        }
+
+        .payment-method.featured::before {
+            content: "Recommended";
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: var(--accent-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .payment-options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .selar-redirect-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .selar-redirect-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .tier-payment-options {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-option-btn {
+            display: block;
+            width: 100%;
+            padding: 10px 15px;
+            margin: 5px 0;
+            background: var(--light-bg);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .payment-option-btn:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .payment-option-btn.selar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+        }
+
+        /* Rest of your existing CSS remains the same */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ... (all your existing CSS remains exactly the same) ... */
+
+        @keyframes zoomInOut {
+            0% { transform: scale(4); }
+            100% {transform: scale(2.4) translate(0px, 50px); }
+        }
+
+        .zoom-animate {
+            animation: zoomInOut 2s ease-in-out;
+            animation-fill-mode: both;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+
+            .payment-options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* Header & Navigation */
+        header {
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            background-color: var(--light-bg);
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        
+.ink-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.03;
+}
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-animation {
+            max-width: 600px;
+            margin: 0 auto;
+            height: 300px;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .animation-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .animation-frame.active {
+            opacity: 1;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        /* Tiers Section */
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .tier-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .tier-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tier-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .tier-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .tier-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .tier-features li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .tier-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .delivery-time {
+            display: inline-block;
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--accent-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .slot-indicator {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .slot-open {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+
+        .slot-closed {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
+
+        /* Gallery Section */
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background-color: var(--card-bg);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .animation-frame img {
+            width: auto;
+            height: 100%;
+            display: block;
+            sobject-fit: cover;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .gallery-item-content {
+            padding: 15px;
+        }
+
+        .gallery-item-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .tag {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--accent-color);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            max-width: 800px;
+            width: 90%;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .lightbox-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-avatar {
+            width: 100%;
+            border-radius: 50%;
+            box-shadow: var(--shadow);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* Process Section */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Contact Section */
+        .contact-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .contact-option {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .payment-options {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-top: 40px;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .payment-method {
+            flex: 1;
+            min-width: 200px;
+            padding: 20px;
+            background-color: var(--light-bg);
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 15px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card-bg);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: var(--border-radius);
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-family: inherit;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        @keyframes zoomInOut {
+            0% { transform: scale(4); }
+            100% {transform: scale(2.4) translate(0px, 50px); }
+        }
+
+        .zoom-animate {
+            animation: zoomInOut 2s ease-in-out;
+            animation-fill-mode: both;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container"> 
+            <div class="logo">Hmmm Arts</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#tiers">Tiers</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" id="themeToggle">🌙</button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Human comics in 42 hours or less.</h1>
+            <p>Fast, heartfelt short comics — hand-drawn, manga-inspired. Human-made, no AI.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn">Request a Commission</a>
+                <a href="#tiers" class="btn btn-secondary">See Tiers</a>
+            </div>
+            <div class="hero-animation">
+                <div class="animation-frame active zoom-animate" id="frame1">
+                    <img src="./assets/megalovania_moonlight.png" alt="Doodle Dash">
+                </div>
+                <div class="animation-frame" id="frame2">
+                    <img src="./assets/medium-art.png" alt="Brush Wave">
+                </div>
+                <div class="animation-frame" id="frame3">
+                    <img src="./assets/complex-art.jpg" alt="Canvas Burst">
+                </div>
+                <div class="animation-frame" id="frame4">
+                    <img src="./assets/custom.png" alt="Canvas Burst">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tiers Section -->
+    <section id="tiers">
+        <div class="container">
+            <div class="section-header">
+                <h2>Commission Tiers</h2>
+                <p>Choose the perfect option for your project</p>
+            </div>
+            <div class="tiers-grid" id="tiersContainer">
+                <!-- Tiers will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2>Portfolio Gallery</h2>
+                <p>Browse some of my work</p>
+            </div>
+            <div class="gallery-filters" id="galleryFilters">
+                <!-- Filter buttons will be populated by JavaScript -->
+            </div>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery items will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Me</h2>
+            </div>
+            <div class="about-content">
+                <div>
+                    <img src="./assets/avatar.png" alt="Artist Avatar" class="about-avatar">
+                </div>
+                <div>
+                    <p>I'm a passionate artist and indie game developer with a deep love for manga and anime aesthetics. My work focuses on creating heartfelt, expressive comics that tell meaningful stories.</p>
+                    <p>I believe in the power of human creativity and craftsmanship, which is why all my work is 100% hand-drawn with no AI generation, though AI has its uses. I dislike wet socks, and like pie. Bent on delivering quality art in record time.</p>
+                    <p>When I'm not drawing comics, I (try to) develope small games, and programming backend APIs.</p>
+                    <div class="social-links">
+                        <a href="https://hmmmgames.itch.io" class="social-link" target="_blank">Itch.io</a>
+                        <a href="https://twitter.com/therealgunroar" class="social-link" target="_blank">Twitter/X</a>
+                        <a href="https://buymeacoffee.com/gunroar" class="social-link" target="_blank">Buy Me a Coffee</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Simple and straightforward commission process</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Choose Tier</h3>
+                    <p>Select the commission tier that fits your needs and budget.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Submit Brief</h3>
+                    <p>Fill out the commission form with your idea and requirements.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Sketch Approval</h3>
+                    <p>Depending on the project complexity, I'll send you a sketch for approval before moving forward.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Final Delivery</h3>
+                    <p>Receive your completed artwork within 42 hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="why">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why choose this over AI</h2>
+                <p>Simple and straightforward commission process</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Legal Safety</h3>
+                    <p>AI tools may be trained on copyrighted art, and usage terms can be unclear. Hear you have clear ownership and use rights to what I draw.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>More Privacy and Trust</h3>
+                    <p>AI collects prompt and image data, so what it makes isn't uniquely yours. Meanwhile I'm just one guy.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>AI has troubles with comics</h3>
+                    <p>Atleast for now anyway. If a comic strip or page is done by an AI it won't be dynamic or consistent as opposed if it was done by a human, even if that human was a 9 year old.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Less Generic Art</h3>
+                    <p>While AI art can be good, it's trained from pre-existing data and styles
+                       This leads to art that has a very "AI did it" look.
+                       With human done art like mine it feels like something that is uniquely yours.
+                    </p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h3>More saucy art</h3>
+                    <p>*Wink* *wink*</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get In Touch</h2>
+                <p>Ready to bring your idea to life?</p>
+            </div>
+            <div class="contact-options">
+                <div class="contact-option">
+                    <h3>Telegram</h3>
+                    <p>Direct message for quick communication</p>
+                    <a href="https://t.me/therealgunroar" class="btn" target="_blank">Message on Telegram</a>
+                </div>
+                <div class="contact-option">
+                    <h3>Twitter/X</h3>
+                    <p>Follow and DM for inquiries</p>
+                    <a href="https://twitter.com/therealgunroar" class="btn" target="_blank">Follow on X</a>
+                </div>
+                <div class="contact-option">
+                    <h3>Buy Me a Coffee</h3>
+                    <p>Support my work and leave a message</p>
+                    <a href="https://buymeacoffee.com/gunroar" class="btn" target="_blank">Buy Me a Coffee</a>
+                </div>
+            </div>
+
+            <!-- Updated Payment Options -->
+            <div class="payment-options">
+                <h3>Payment Options</h3>
+                <p>Choose your preferred payment method. All payments are secure and protected.</p>
+                
+                <div class="payment-options-grid">
+                    <div class="payment-method featured">
+                        <h4>💳 Selar (Recommended)</h4>
+                        <p>Secure payments with cards, bank transfer, and mobile money</p>
+                        <p><strong>Available for all tiers</strong></p>
+                        <button class="selar-redirect-btn" onclick="redirectToSelar('all')">
+                            Pay with Selar
+                        </button>
+                    </div>
+                    
+                    <!-- <div class="payment-method">
+                        <h4>☕ Buy Me a Coffee</h4>
+                        <p>Simple and secure payment via Buy Me a Coffee</p>
+                        <a href="https://buymeacoffee.com/gunroar" class="btn" target="_blank" style="margin-top: 10px; display: block;">
+                            Pay with BMC
+                        </a>
+                    </div> -->
+                    
+                    <div class="payment-method">
+                        <h4>₿ Crypto (Solana)</h4>
+                        <p>Pay with SOL or other SPL tokens, then contact me.</p>
+                        <button class="btn" id="showSolanaModal" style="margin-top: 10px; width: 100%;">
+                            Show Wallet Address
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commission Request Form -->
+            <!-- div class="commission-form" style="margin-top: 40px;">
+                <h3>Optional Commission Request Form</h3>
+                <h4>No need to fill this if paying via Selar.</h4>
+                <form id="commissionForm">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" id="name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact" class="form-label">Email or Telegram Handle</label>
+                        <input type="text" id="contact" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tier" class="form-label">Commission Tier</label>
+                        <select id="tier" class="form-select" required>
+                            <option value="">Select a tier</option>
+                            <option value="doodle-dash">Doodle Dash</option>
+                            <option value="brush-wave">Brush Wave</option>
+                            <option value="canvas-burst">Canvas Burst</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="form-label">Project Description</label>
+                        <textarea id="description" class="form-textarea" placeholder="Describe your idea, characters, setting, and any specific requirements..." required></textarea>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label class="form-label">
+                            <input type="checkbox" id="rightsAgreement" required>
+                            I agree to the usage rights: Personal use only unless commercial rights are purchased separately.
+                        </label>
+                    </div> -->
+                    
+                    <!-- Payment Method Selection
+                    <div class="form-group">
+                        <label class="form-label">Preferred Payment Method</label>
+                        <div id="paymentMethodSelection">
+                            <!-- Payment options will be populated dynamically
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            <input type="checkbox" id="rightsAgreement" required>
+                            I agree to the usage rights: Personal use only unless commercial rights are purchased separately.
+                        </label>
+                    </div> -->
+                    <!--button type="submit" class="btn">Submit Commission Request</button-->
+                </form>
+            </div>
+
+            <!-- Testimonials -->
+            <div class="testimonials" id="testimonialsContainer">
+                <!-- Testimonials will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#tiers">Tiers</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#about">About</a>
+                <a href="#process">Process</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <p>&copy; 2023 Human Arts. All rights reserved. Hand-drawn with ❤️, no AI.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">&times;</button>
+            <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            <h3 id="lightboxTitle"></h3>
+            <p id="lightboxDescription"></p>
+            <div id="lightboxTier"></div>
+            <div class="gallery-item-tags" id="lightboxTags"></div>
+        </div>
+    </div>
+
+    <!-- Solana Wallet Modal -->
+    <div class="lightbox" id="solanaModal">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="solanaModalClose">&times;</button>
+            <h3>Solana Wallet Address</h3>
+            <p>Send SOL or SPL tokens to the following address:</p>
+            <div style="background: #3e66d3; padding: 15px; border-radius: 8px; margin: 20px 0; word-break: break-all;">
+                <span id="walletAddress">BxSo6A8Ytpe2a2ri1wQKoE48yiHc1wyozwiHsYhyCNCX</span>
+            </div>
+            <!-- <div class="qr-code" style="margin: 20px auto;">
+                <span>QR Code for {{SOLANA_WALLET}}</span>
+            </div> -->
+            <p>After payment, please contact me with your transaction ID.</p>
+        </div>
+    </div>
+    <script src="./main.js"></script>
+</body>
+</html>
