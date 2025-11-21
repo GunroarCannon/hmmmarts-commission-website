@@ -14,6 +14,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@therealgunroar">
     <meta name="twitter:creator" content="@therealgunroar">
+    <meta name="solana-wallet" content="none">
     
     <style>
         /* CSS Variables for Theme */
@@ -855,6 +856,34 @@
                 justify-content: center;
             }
         }
+        /* Free Commission Form Styles */
+.free-commission-form {
+    margin-top: 20px;
+}
+
+.form-submit-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.form-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
+}
+
+.form-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
     </style>
 </head>
 <body>
@@ -872,6 +901,11 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
+            <div id="userSection">
+                <button id="loginBtn" class="btn">Sign in with Google</button>
+                <button id="logoutBtn" class="btn" style="display:none;">Logout</button>
+                <div id="userInfo"></div>
+            </div>
             <button class="theme-toggle" id="themeToggle">🌙</button>
             <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
         </div>
@@ -884,6 +918,7 @@
             <p>Fast, heartfelt short comics — hand-drawn, manga-inspired. Human-made, no AI.</p>
             <div class="hero-buttons">
                 <a href="#contact" class="btn">Request a Commission</a>
+                <button id="freeBtn" class="btn">Log in to claim free drawing</button>
                 <a href="#tiers" class="btn btn-secondary">See Tiers</a>
             </div>
             <div class="hero-animation">
@@ -900,7 +935,6 @@
                     <img src="./assets/custom.png" alt="Canvas Burst">
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- Tiers Section -->
@@ -1086,58 +1120,6 @@
                 </div>
             </div>
 
-            <!-- Commission Request Form -->
-            <!-- div class="commission-form" style="margin-top: 40px;">
-                <h3>Optional Commission Request Form</h3>
-                <h4>No need to fill this if paying via Selar.</h4>
-                <form id="commissionForm">
-                    <div class="form-group">
-                        <label for="name" class="form-label">Your Name</label>
-                        <input type="text" id="name" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact" class="form-label">Email or Telegram Handle</label>
-                        <input type="text" id="contact" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="tier" class="form-label">Commission Tier</label>
-                        <select id="tier" class="form-select" required>
-                            <option value="">Select a tier</option>
-                            <option value="doodle-dash">Doodle Dash</option>
-                            <option value="brush-wave">Brush Wave</option>
-                            <option value="canvas-burst">Canvas Burst</option>
-                            <option value="custom">Custom</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="description" class="form-label">Project Description</label>
-                        <textarea id="description" class="form-textarea" placeholder="Describe your idea, characters, setting, and any specific requirements..." required></textarea>
-                    </div>
-                    <!-- <div class="form-group">
-                        <label class="form-label">
-                            <input type="checkbox" id="rightsAgreement" required>
-                            I agree to the usage rights: Personal use only unless commercial rights are purchased separately.
-                        </label>
-                    </div> -->
-                    
-                    <!-- Payment Method Selection
-                    <div class="form-group">
-                        <label class="form-label">Preferred Payment Method</label>
-                        <div id="paymentMethodSelection">
-                            <!-- Payment options will be populated dynamically
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">
-                            <input type="checkbox" id="rightsAgreement" required>
-                            I agree to the usage rights: Personal use only unless commercial rights are purchased separately.
-                        </label>
-                    </div> -->
-                    <!--button type="submit" class="btn">Submit Commission Request</button-->
-                </form>
-            </div>
-
             <!-- Testimonials -->
             <div class="testimonials" id="testimonialsContainer">
                 <!-- Testimonials will be populated by JavaScript -->
@@ -1184,9 +1166,319 @@
             <!-- <div class="qr-code" style="margin: 20px auto;">
                 <span>QR Code for {{SOLANA_WALLET}}</span>
             </div> -->
-            <p>After payment, please contact me with your transaction ID.</p>
+            <p>After payment, please get in touch with me with your transaction ID.</p>
         </div>
     </div>
+<!-- Free Commission Popup -->
+<div class="lightbox" id="freeCommissionPopup">
+    <div class="lightbox-content" style="max-width: 500px;">
+        <button class="lightbox-close" id="freePopupClose">&times;</button>
+        <h3>Claim Your Free Drawing</h3>
+        <form id="freeCommissionForm">
+            <div class="form-group">
+                <label for="commissionDescription" class="form-label">Describe your idea:</label>
+                <textarea 
+                    id="commissionDescription" 
+                    class="form-textarea" 
+                    placeholder="Tell me about your characters, setting, story, or any specific details you'd like in your drawing..."
+                    rows="6"
+                    required
+                ></textarea>
+            </div>
+            <div class="form-group">
+                <label for="referenceLinks" class="form-label">Reference links (optional):</label>
+                <input 
+                    type="text" 
+                    id="referenceLinks" 
+                    class="form-input" 
+                    placeholder="Paste links to character references, mood boards, etc."
+                >
+            </div>
+            <div class="form-group">
+                <label for="contactInfo" class="form-label">Your contact info:</label>
+                <textarea 
+                    id="contactInfo" 
+                    class="form-textarea" 
+                    placeholder="Tell me your preferred way to send you your commission to you (email, Telegram, Twitter, etc.)..."
+                    rows="6"
+                    required
+                ></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn" style="width: 100%;" id="submitCommissionBtn">Send Commission Request</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+        import { 
+            getAuth, signInWithPopup, GoogleAuthProvider, 
+            signOut, onAuthStateChanged 
+        } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+        import { 
+            getFirestore, doc, getDoc, setDoc, updateDoc 
+        } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyDTliyqUoPyVSuezKWQNQqUb1Wy3o52yAg",
+            authDomain: "hmmmarts-538c8.firebaseapp.com",
+            projectId: "hmmmarts-538c8",
+            storageBucket: "hmmmarts-538c8.firebasestorage.app",
+            messagingSenderId: "913189858181",
+            appId: "1:913189858181:web:3bb7aec5026139483772ec",
+            measurementId: "G-QGHV3R3ZEW"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const provider = new GoogleAuthProvider();
+
+        // Initialize EmailJS - REPLACE WITH YOUR ACTUAL KEYS
+        emailjs.init("UB1E62AsdnsS7DfOE"); // Get from EmailJS dashboard
+
+        // DOM Elements
+        const loginBtn = document.getElementById("loginBtn");
+        const logoutBtn = document.getElementById("logoutBtn");
+        const freeBtn = document.getElementById("freeBtn");
+        const userInfo = document.getElementById("userInfo");
+        const freeCommissionPopup = document.getElementById("freeCommissionPopup");
+        const freePopupClose = document.getElementById("freePopupClose");
+        const freeCommissionForm = document.getElementById("freeCommissionForm");
+        const submitCommissionBtn = document.getElementById("submitCommissionBtn");
+
+        // Auth Handlers
+        loginBtn.onclick = () => signInWithPopup(auth, provider);
+        logoutBtn.onclick = () => signOut(auth);
+
+        // Main Auth Handler
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                // Logged out
+                loginBtn.style.display = "inline-block";
+                logoutBtn.style.display = "none";
+                userInfo.textContent = "";
+                freeBtn.textContent = "Log in to claim free drawing";
+                freeBtn.disabled = false;
+                freeBtn.onclick = () => signInWithPopup(auth, provider);
+                return;
+            }
+
+            // Logged in
+            loginBtn.style.display = "none";
+            logoutBtn.style.display = "inline-block";
+            userInfo.textContent = `Logged in as ${user.displayName}`;
+
+            try {
+                console.log("User logged in:", user);
+                const userRef = doc(db, "users", user.uid);
+                let snap = await getDoc(userRef);
+
+                // Create user if doesn't exist
+                if (!snap.exists()) {
+                    await setDoc(userRef, {
+                        email: user.email,
+                        name: user.displayName,
+                        freeCredits: 1,
+                        paidCredits: 0,
+                        createdAt: new Date(),
+                        lastLogin: new Date()
+                    });
+                    snap = await getDoc(userRef);
+                } else {
+                    // Update last login
+                    await updateDoc(userRef, {
+                        lastLogin: new Date()
+                    });
+                }
+
+                const userData = snap.data();
+                console.log("email list")
+
+                // Add to email list
+                const emailListRef = doc(db, "emailList", user.uid);
+                console.log("debug before setdoc")
+                await setDoc(emailListRef, {
+                    email: user.email,
+                    name: user.displayName,
+                    freeCreditAvailable: userData.freeCredits > 0,
+                    lastLogin: new Date(),
+                    createdAt: userData.createdAt || new Date()
+                }, { merge: true });
+
+                console.log("debug done")
+
+                // Handle free button
+                if (userData.freeCredits > 0) {
+                    freeBtn.textContent = "Claim Free Drawing";
+                    freeBtn.disabled = false;
+                    freeBtn.onclick = () => openFreeCommissionPopup(user, userRef, userData);
+                } else {
+                    freeBtn.textContent = "Free Request Used";
+                    freeBtn.disabled = true;
+                    freeBtn.onclick = null;
+                }
+
+            } catch (error) {
+                console.error("Auth error:", error);
+                freeBtn.textContent = "Error loading credits";
+                freeBtn.disabled = true;
+            }
+        });
+
+        // Open Commission Popup
+        function openFreeCommissionPopup(user, userRef, userData) {
+            freeCommissionPopup.classList.add('active');
+            freeCommissionForm.reset();
+        }
+
+        // Handle Form Submission
+        freeCommissionForm.onsubmit = async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = submitCommissionBtn;
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = "Submitting...";
+            submitBtn.disabled = true;
+            
+            try {
+                const user = auth.currentUser;
+                if (!user) throw new Error("User not logged in");
+                
+                const description = document.getElementById('commissionDescription').value;
+                const references = document.getElementById('referenceLinks').value;
+                const contactInfo = document.getElementById('contactInfo').value;
+                
+                const userRef = doc(db, "users", user.uid);
+                
+                // Create commission in Firestore
+                const commissionId = `free_${Date.now()}`;
+                const commissionRef = doc(db, "commissions", commissionId);
+
+                console.log("Submitting commission for user:", user.uid);
+                
+                await setDoc(commissionRef, {
+                    type: "free",
+                    userId: user.uid,
+                    userEmail: user.email,
+                    userName: user.displayName,
+                    description: description,
+                    contactInfo: contactInfo,
+                    references: references || "None provided",
+                    status: "pending",
+                    submittedAt: new Date(),
+                    estimatedCompletion: new Date(Date.now() + 42 * 60 * 60 * 1000)
+                });
+
+                console.log("Commission created with ID:", commissionId);
+
+                // Send automatic email via EmailJS
+                await sendAutoEmail(user, description, references, contactInfo);
+                console.log("Automatic email sent");
+                
+                // Mark credit as used
+                await updateDoc(userRef, {
+                    freeCredits: 0,
+                    freeCreditUsedAt: new Date(),
+                    lastCommissionId: commissionId
+                });
+
+                // Update email list
+                const emailListRef = doc(db, "emailList", user.uid);
+                await updateDoc(emailListRef, {
+                    freeCreditAvailable: false,
+                    lastCommission: new Date()
+                });
+
+                // Success
+                freeCommissionPopup.classList.remove('active');
+                freeBtn.textContent = "Free Request Used";
+                freeBtn.disabled = true;
+                freeBtn.onclick = null;
+                
+                showSuccessMessage();
+                
+            } catch (error) {
+                console.error("Submission error:", error);
+                alert("❌ Failed to submit request. Please try again.");
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        };
+
+        // Send Automatic Email with EmailJS
+        async function sendAutoEmail(user, description, references, contactInfo) {
+            const templateParams = {
+                to_email: 'gunroarcannon@gmail.com', // Your email
+                from_name: user.displayName,
+                from_email: user.email,
+                user_id: user.uid,
+                description: description+'\n\nContact Info:\n'+contactInfo,
+                references: references || 'No references provided',
+                submitted_at: new Date().toLocaleString(),
+                estimated_completion: new Date(Date.now() + 42 * 60 * 60 * 1000).toLocaleString()
+            };
+
+            console.log("Sending email with params:", templateParams);
+
+            try {
+                // REPLACE WITH YOUR ACTUAL EmailJS SERVICE_ID and TEMPLATE_ID
+                const response = await emailjs.send(
+                    '829831524252-q6tg45514de',    // From EmailJS dashboard
+                    'template_r1zf2pj',   // From EmailJS dashboard  
+                    templateParams
+                );
+                console.log('Email sent successfully:', response);
+                return response;
+            } catch (error) {
+                console.log('Email failed:', error);
+                // Don't throw error - still complete the commission
+                // Email failure shouldn't block the user
+                return null;
+            }
+        }
+        
+        function closeSuccessPopup() {
+            const successPopup = document.getElementById('successPopup');
+            if (successPopup) successPopup.remove();
+        }
+
+
+        // Success Message
+        function showSuccessMessage() {
+            const successHTML = `
+                <div class="lightbox active" id="successPopup">
+                    <div class="lightbox-content" style="max-width: 400px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 20px;">🎉</div>
+                        <h3>Request Submitted Successfully!</h3>
+                        <p>Your free commission request has been received!</p>
+                        <p><strong>I've been automatically notified and will get back to you within 42 hours.</strong></p>
+                        <button class="btn" onclick="function closeSuccessPopup() {
+            const successPopup = document.getElementById('successPopup');
+            if (successPopup) successPopup.remove();
+        } closeSuccessPopup()" style="margin-top: 20px;">
+                            Awesome, can't wait!
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            const existingPopup = document.getElementById('successPopup');
+            if (existingPopup) existingPopup.remove();
+            
+            document.body.insertAdjacentHTML('beforeend', successHTML);
+        }
+
+        // Close Popup Handlers
+        freePopupClose.onclick = () => freeCommissionPopup.classList.remove('active');
+        freeCommissionPopup.onclick = (e) => {
+            if (e.target === freeCommissionPopup) freeCommissionPopup.classList.remove('active');
+        };
+ </script>
     <script src="./main.js"></script>
 </body>
 </html>
